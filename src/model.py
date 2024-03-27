@@ -1,20 +1,27 @@
-# training_pipeline.py
-
 import os
 import sys
 import pandas as pd
-from joblib import dump
+import pickle
 from src.exception import CustomException
 from src.logger import logging
 from src.preprocessing import preprocess_skills_data, match_skills_with_jobs
-from src.model import train_model
 from src.resume_parser import extract_skills_from_resume
+
+# Define the train_model function
+def train_model(resume_data, job_postings_data):
+    # Your training logic here
+    pass
+
+# Define the save_model function
+def save_model(model, file_path):
+    with open(file_path, 'wb') as file:
+        pickle.dump(model, file)
 
 def main():
     try:
         # Specify file paths
-        resume_dataset_path = "path/to/resume_dataset.json"
-        job_postings_dataset_path = "path/to/job_postings_dataset.csv"
+        resume_dataset_path = "notebooks/data/train_data (2).json"
+        job_postings_dataset_path = "notebooks/data/final_datasets.csv"
 
         # Load datasets
         resume_data = pd.read_json(resume_dataset_path)
@@ -48,5 +55,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

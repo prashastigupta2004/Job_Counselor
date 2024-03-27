@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Job Postings</title>
+</head>
+<body>
+    <h1>Matching Job Postings</h1>
+    <p>Here are the matching job postings based on your resume:</p>
+    <ul>
+        {% for url in matching_urls %}
+            <li><a href="{{ url }}" target="_blank">{{ url }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
