@@ -1,39 +1,33 @@
 {
   "lang":"en",
-  "name":"model",
+  "name":"pipeline",
   "version":"0.0.0",
-  "spacy_version":">=2.3.5",
+  "spacy_version":">=3.7.4,<3.8.0",
   "description":"",
   "author":"",
   "email":"",
   "url":"",
   "license":"",
-  "spacy_git_version":"1d4b1dea2",
+  "spacy_git_version":"bff8725f4",
   "vectors":{
     "width":0,
     "vectors":0,
     "keys":0,
-    "name":"spacy_pretrained_vectors"
+    "name":null,
+    "mode":"default"
+  },
+  "labels":{
+    "ner":[
+
+    ]
   },
   "pipeline":[
     "ner"
   ],
-  "factories":{
-    "ner":"ner"
-  },
-  "labels":{
-    "ner":[
-      "College Name",
-      "Companies worked at",
-      "Degree",
-      "Designation",
-      "Email Address",
-      "Graduation Year",
-      "Location",
-      "Name",
-      "Skills",
-      "UNKNOWN",
-      "Years of Experience"
-    ]
-  }
+  "components":[
+    "ner"
+  ],
+  "disabled":[
+
+  ]
 }
