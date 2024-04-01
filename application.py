@@ -15,8 +15,8 @@ job_postings_dataset_path = "notebooks/data/final_datasets.csv"
 job_postings_data = pd.read_csv(job_postings_dataset_path)
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def main():
+    return render_template('main.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -46,6 +46,10 @@ def upload_file():
 def home():
     matching_urls = request.args.getlist('matching_urls')
     return render_template('home.html', matching_urls=matching_urls)
+@app.route('/dashboard')
+def dash():
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)  # Turn off debug mode
