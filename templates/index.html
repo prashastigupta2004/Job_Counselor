@@ -39,12 +39,34 @@
         }
         function alertSuccess(){
               // Display success alert
-              Swal.fire({
-                title: 'Success!',
-                text: 'File uploaded successfully.',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-            });
+              let timerInterval;
+Swal.fire({
+  title:"Uploading file...",
+  html: "completing in <b></b> milliseconds.",
+  timer: 1500,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading();
+    const timer = Swal.getPopup().querySelector("b");
+    timerInterval = setInterval(() => {
+      timer.textContent = `${Swal.getTimerLeft()}`;
+    }, 100);
+  },
+  willClose: () => {
+    clearInterval(timerInterval);
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log("I was closed by the timer");
+  }
+});
+        //      Swal.fire({
+        //        title: 'Success!',
+        //        text: 'File uploaded successfully.',
+        //        icon: 'success',
+        //        confirmButtonText: 'Ok'
+        //    });
         }
         
 
