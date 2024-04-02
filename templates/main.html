@@ -18,6 +18,7 @@
             font-family: Arial, sans-serif;
             background-color: #f9f9f9;
         }
+        
         .wrapper{
             margin: 0;
             padding: 0;
@@ -99,17 +100,7 @@
             font-size: 2px;
         }
 
-        .create-account-button {
-            color: skyblue;
-            border: none;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            cursor: pointer;
-            margin-block-start: -4.4%;
-            margin-left: 80%;
-        }
+         
 
         .arrow-icon {
             margin-right: 8px;
@@ -216,31 +207,94 @@
 </head>
 <body>
     <div class="wrapper">
+        <style>
+            /* Reset default styles */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+    
+            /* Basic styling */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f9f9f9;
+            }
+    
+            .header {
+                background-color: white;
+                color: black;
+            }
+    
+            .navbar-brand img {
+                height: 30px;
+            }
+    
+            .navbar-nav {
+                margin-left: auto;
+            }
+    
+            .navbar-nav .nav-item {
+                margin-left: 10px;
+            }
+    
+            .create-account-button {
+                color: skyblue;
+            }
+    
+            /* Responsive styles */
+            @media (max-width: 768px) {
+                .navbar-nav {
+                    flex-direction: column;
+                    align-items: center;
+                }
+    
+                .navbar-nav .nav-item {
+                    margin: 10px 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
         <header class="header">
-            <nav>
-                <div>
-                    <img src="logo.png" alt="Job Finder">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="logo.png" alt="Job Finder">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#about">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#contact">Contact</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex">
+                            <button class="btn btn-primary me-2 create-account-button">Create Account</button>
+                            <button class="btn btn-outline-primary sign-in-button">Sign In</button>
+                        </div>
+                    </div>
                 </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <button class="create-account-button">
-                    <!-- <img src="path-to-arrow-icon" alt="arrow icon" class="arrow-icon"> -->
-                    Create Account
-                </button>
             </nav>
+        </header>
             <div class="hero" id="home">
-                <div class="left" id="content">
+                <div class="left " id="content">
             <div class="container">
-                <div class="maincontent">
+                <div class="maincontent ">
                     <h1>Search, Find, and Apply !!</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id lectus sit amet augue aliquet consectetur. Donec interdum, sem et facilisis luctus, neque sapien tincidunt odio, et efficitur tellus locus tincidunt metus.</p>
+                    <p class="mt-4 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id lectus sit amet augue aliquet consectetur. Donec interdum, sem et facilisis luctus, neque sapien tincidunt odio, et efficitur tellus locus tincidunt metus.</p>
                 </div>
-                <div class="container">
+                <div class="container mt-3 mb-4">
 
-                    <a class="btn btn-primary" href="/dashboard">Lets Get Started</a>
+                    <a class="btn btn-primary mt-3" href="/dashboard">Lets Get Started</a>
                 </div>
             </div>
             <!-- <div class="search-icon"> -->
@@ -257,7 +311,7 @@
             <!-- </div> -->
             </div>
             </div>
-        </header>
+      
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
