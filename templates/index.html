@@ -17,21 +17,36 @@
                     <label class="custom-file-label" for="resumeInput" >Choose file</label>
                 </div>
                 <br>
-                <button type="submit" onsubmit="checkFileType()" class="btn btn-primary mt-2" >Upload</button>
+                <button type="submit"   class="btn btn-primary mt-2" >Upload</button>
             </form>
         </div>
     </div>
     <script src="sweetalert2.min.js"></script>
     <script>
-        
+        document.getElementById('uploadForm').addEventListener('file', function(event) {
+            // Prevent default form submission behavior
+            event.preventDefault();
+
+            // Display success alert
+            alertSuccess();
+        });
         function updateFileName() {
             const fileInput = document.getElementById('resumeInput');
             const fileName = fileInput.files[0].name;
             const label = document.querySelector('.custom-file-label');
             label.textContent = fileName;  
-            
+            alertSuccess();
         }
-      
+        function alertSuccess(){
+              // Display success alert
+              Swal.fire({
+                title: 'Success!',
+                text: 'File uploaded successfully.',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            });
+        }
+        
 
     </script>
     <script src="./index.js"></script>
