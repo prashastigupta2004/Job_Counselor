@@ -20,11 +20,11 @@
 
     <script>
         // Define matchingUrls array using Jinja
-var matchingUrls = {{ matching_urls | tojson | safe }};
+var matching_Jobs = {{ matching_jobs | json | safe }};
 
 
         // Function to create job listing box
-        function createJobListing(url) {
+        function createJobListing(job) {
             // Create elements for job listing box
             var jobBox = document.createElement('div');
             jobBox.classList.add('card', 'mb-3');
@@ -32,13 +32,13 @@ var matchingUrls = {{ matching_urls | tojson | safe }};
             jobBoxBody.classList.add('card-body');
             var jobTitle = document.createElement('h5');
             jobTitle.classList.add('card-title');
-            jobTitle.textContent = 'Job Role: Sample Job Role';
+            jobTitle.textContent = 'Job Role: '+job['title'].join(', ');
             var jobLocation = document.createElement('p');
             jobLocation.classList.add('card-text');
-            jobLocation.textContent = 'Location: Sample Location';
+            jobLocation.textContent = 'Location: '+job['job_location'].join(', ');
             var applyButton = document.createElement('a');
             applyButton.classList.add('btn', 'btn-primary', 'mr-2');
-            applyButton.setAttribute('href', url);
+            applyButton.setAttribute('href', job['url']);
             applyButton.setAttribute('target', '_blank');
             applyButton.textContent = 'Apply';
             var saveButton = document.createElement('button');
@@ -57,9 +57,20 @@ var matchingUrls = {{ matching_urls | tojson | safe }};
         }
 
         // Create job listing boxes for each URL
-        matchingUrls.forEach(function(url) {
-            createJobListing(url);
-        });
+        matching_Jobs.forEach((jsonString)=>{
+            jsonString = jsonString.replace(/'/g, '"');
+            // Remove extra spaces
+            jsonString = jsonString.replace(/,\s+'/g, ", ");
+            jsonString = jsonString.replace(/:\s+'/g, ": ");
+            var jsonObject = JSON.parse(jsonString);
+            createJobListing(jsonObject);
+            console.log(jsonObject);
+        }
+        //matchingUrls.forEach(function(url) {
+        //    createJobListing(url);
+        //});
+           
+        );
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
