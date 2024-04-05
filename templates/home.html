@@ -20,7 +20,7 @@
 
     <script>
         // Define matchingUrls array using Jinja
-var matching_Jobs = {{ matching_jobs | safe }};
+var matching_Jobs = {{ matching_jobs | tojson  | safe }};
 
 
         // Function to create job listing box
