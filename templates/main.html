@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Advisor</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <style>
+        /* Reset default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .wrapper {
+            margin: 0;
+            padding: 0;
+            height:100vh;
+        }
+
+        .container {
+            margin: 0 auto;
+        }
+
+        .header {
+            background-color: white;
+            color: black;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 10px;
+            display: flex;
+            margin-left: 20%;
+            margin-top: -1%;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+            margin-right: 4%;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left {
+            box-sizing: border-box;
+            flex-direction: column;
+            align-items: left;
+            width: 50%;
+            height: 100%;
+            padding-left: 10px;
+        }
+
+        .maincontent {
+            inset: 0;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .search-icon {
+            display: flex;
+            border-radius: 25px;
+            margin-right: 35%;
+            margin-left: 53%;
+        }
+
+        .search-icon input {
+            flex-grow: 1;
+            border: none;
+            padding: 5px;
+            font-size: 12px;
+            border-radius: 25px;
+            border: solid #63deee;
+        }
+
+        .search-icon button {
+            background-color: #63deee;
+            color: white;
+            border: none;
+            border-radius: 21px;
+            padding: 4px 14px;
+            cursor: pointer;
+            font-size: 2px;
+        }
+
+        .arrow-icon {
+            margin-right: 8px;
+        }
+
+        h1 {
+            font-size: 66px;
+            font-weight: 800;
+            color: #0571d3;
+            margin-block-start: 6%;
+            margin-left: 2%;
+        }
+
+        p {
+            color: black;
+            margin-left: 2%;
+            margin: 2%;
+            font-size: large;
+            word-spacing: 0.5rem;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: start;
+            padding: 10px;
+        }
+
+        .search-bar {
+            display: flex;
+            border: 2px solid #000;
+            border-radius: 25px;
+            margin: 2%;
+            align-items: center;
+            border: none;
+        }
+
+        .search-bar input {
+            flex-grow: 2;
+            border: solid white;
+            padding: 10px;
+            border-radius: 25px;
+            bottom: 40%;
+        }
+
+        .icon {
+            background-color: #0074d9;
+            width: 34px;
+            height: 34px;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            border-radius: 212px;
+            padding: 8px 8px;
+            cursor: pointer;
+            font-size: 0px;
+        }
+        /*
+        sign in
+        */
+      /* Custom CSS */
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 73px);
+}
+.make-img-bgremove{
+    mix-blend-mode: multiply;
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                margin-left: 0;
+                margin-top: 0;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .search-icon {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            .create-account-button {
+                margin-left: 0;
+            }
+
+            h1 {
+                font-size: 40px;
+                margin-top: 2%;
+            }
+
+            .search-bar input {
+                flex-grow: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            p {
+                font-size: medium;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <!-- <img src="{{ url_for('static', filename='images/logo.jpeg') }}" width="30" height="30" class="d-inline-block align-top me-2" style="mix-blend-mode: multiply;" alt=""> -->
+                        <span class="logo mr-0 h2" style="font-family:Verdana, Geneva, Tahoma, sans-serif">J</span>ob<span class="logo mr-0" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">A</span>dvisor.ai
+                    </a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#about">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#contact">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#Doc">Documentation</a>
+                            </li>
+                            
+                        </ul>
+                        <div class="d-flex">
+                            <button class="btn btn-primary me-2 create-account-button ml-2 mr-2" data-toggle="modal" data-target="#signupModal">Create Account</button>
+                            <button class="btn btn-outline-primary sign-in-button" data-toggle="modal" data-target="#signinModal">Sign In</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+        </header>
+        <div class="hero" id="home">
+            <div class="left" id="content">
+                <div class="container">
+                    <div class="maincontent">
+                        <h1>Search, Find, and Apply !!</h1>
+                        <p class="mt-4 mb-2 lead " style="font-size: 16px; font-family:Arial, Helvetica, sans-serif">Elevate your job search journey with JobAdvisor Your AI Job Companion. Explore custom-tailored job recommendations aligned with your resume, while our counselor chatbot provides personalized advice and support. Find, apply, and excel in your dream career effortlessly with our intuitive platform...</p>
+                    </div>
+                    <div class="container mt-3 mb-4">
+                        <a class="btn btn-primary mt-3" href="/dashboard">Lets Get Started</a>
+                      <button class="btn btn-secondary mt-3 ml-3">Generate Your CV Here!</button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="right mt-4">
+                <div class="container mt-4">
+                    <img src="{{ url_for('static', filename='images/job.jpeg') }}" alt="img not found" class="img-fluid make-img-bgremove">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+   <!-- Sign Up Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title  mx-left" id="signupModalLabel"><strong >Embark on Your Career Quest with JobMentee Pro</strong> </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Your sign up form goes here -->
+                <section class="vh-100">
+                    <div class="container py-5 h-100">
+                      <div class="row d-flex align-items-center justify-content-center h-100">
+                       
+                        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                            <h3 class="mb-4">
+                                <strong>Sign-Up</strong>
+                            </h3>
+                          <form>
+
+                            <!-- Email input -->
+                           
+                            <div class="form-outline mb-4">
+                              <input type="email" id="form1Example13" class="form-control form-control-lg" />
+                              <label class="form-label" for="form1Example13">Email address</label>
+                            </div>
+                  
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                              <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                              <label class="form-label" for="form1Example23">Password</label>
+                            </div>
+                  
+                            <div class="d-flex justify-content-around align-items-center mb-4">
+                              <!-- Checkbox -->
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                                <label class="form-check-label" for="form1Example3"> Remember me </label>
+                              </div>
+                              <!-- <a href="#!">Forgot password?</a> -->
+                            </div>
+                  
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Get Started</button>
+                  
+                            <div class="divider d-flex align-items-center my-4">
+                              <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                            </div>
+                  
+                            <!-- <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
+                              role="button">
+                              <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
+                            </a> -->
+                            <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
+                              role="button">
+                              <i class="fab fa-twitter me-2 mb-3"></i>Continue with LinkedIn</a>
+                  
+                          </form>
+                        </div>
+                        <div class="col-md-8 col-lg-7 col-xl-6">
+                            <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-signu-form/draw2.svg"
+                              class="" alt="Phone image"> -->
+                              <img src="{{url_for('static', filename='images/Signup.jpeg')}}" class="img-fluid" alt="SignUpMe">
+                          </div>
+                      </div>
+                    </div>
+                  </section>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Sign Up</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+   <!-- Sign In Modal -->
+<div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="signinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="signinModalLabel"><strong>Start Exploring! Sign In Now </strong></h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Your sign in form goes here -->
+                <section class="vh-100">
+                    <div class="container py-5 h-100">
+                      <div class="row d-flex align-items-center justify-content-center h-100">
+                        <div class="col-md-8 col-lg-7 col-xl-6">
+                          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                            class="img-fluid" alt="Phone image">
+                        </div>
+                        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                            <h3 class="mb-4 mx-auto">
+                                <strong>Sign-In</strong>
+                            </h3>
+                          <form>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                              <input type="email" id="form1Example13" class="form-control form-control-lg" />
+                              <label class="form-label" for="form1Example13">Email address</label>
+                            </div>
+                  
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                              <input type="password" id="form1Example23" class="form-control form-control-lg" />
+                              <label class="form-label" for="form1Example23">Password</label>
+                            </div>
+                  
+                            <div class="d-flex justify-content-around align-items-center mb-4">
+                              <!-- Checkbox -->
+                              <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked />
+                                <label class="form-check-label" for="form1Example3"> Remember me </label>
+                              </div>
+                              <a href="#!">Forgot password?</a>
+                            </div>
+                  
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+                  
+                            <div class="divider d-flex align-items-center my-4">
+                              <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                            </div>
+                  
+                            <!-- <a class="btn btn-primary btn-lg btn-block" style="background-color: #3b5998" href="#!"
+                              role="button">
+                              <i class="fab fa-facebook-f me-2"></i>Continue with Facebook
+                            </a> -->
+                            <a class="btn btn-primary btn-lg btn-block" style="background-color: #55acee" href="#!"
+                              role="button">
+                              <i class="fab fa-twitter me-2"></i>Continue with LinkedIn</a>
+                  
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Sign In</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -43,7 +43,7 @@ def preprocess_skills_data(df):
     
     return df
 
-def match_skills_with_jobs(extracted_skills, job_dataset):
+# def match_skills_with_jobs(extracted_skills, job_dataset):
     """
     Match extracted skills with job dataset and return matching URLs.
     """

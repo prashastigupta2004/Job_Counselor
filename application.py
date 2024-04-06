@@ -15,8 +15,8 @@ job_postings_dataset_path = "notebooks/data/final_datasets.csv"
 job_postings_data = pd.read_csv(job_postings_dataset_path)
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def main():
+    return render_template('main.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -37,15 +37,19 @@ def upload_file():
         extracted_skills = extract_skills(resume_text)
 
         # Match skills with job postings and get matching URLs
-        matching_urls = match_skills_with_jobs(extracted_skills, job_postings_data)
+        matching_jobs = match_skills_with_jobs(extracted_skills, job_postings_data)
 
         # Pass the matching URLs to the home template
-        return redirect(url_for('home', matching_urls=matching_urls))
+        return redirect(url_for('home', matching_jobs=matching_jobs))
 
 @app.route('/home')
 def home():
-    matching_urls = request.args.getlist('matching_urls')
-    return render_template('home.html', matching_urls=matching_urls)
+    matching_jobs = request.args.getlist('matching_jobs')
+    return render_template('home.html', matching_jobs=matching_jobs)
+@app.route('/dashboard')
+def dash():
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)  # Turn off debug mode

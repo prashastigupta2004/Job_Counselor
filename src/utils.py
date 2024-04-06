@@ -27,10 +27,13 @@ def load_object(file_path):
     return obj
 
 def match_skills_with_jobs(extracted_skills, job_postings_data):
-    matching_urls = []
+    # matching_urls = []
+    matching_jobs = []
     for _, row in job_postings_data.iterrows():
         try:
+          
             job_skills = row['Skills']
+            # print("---------------",job_skills)
             # Check if job_skills is a string, otherwise continue to the next row
             if not isinstance(job_skills, str):
                 continue
@@ -43,9 +46,16 @@ def match_skills_with_jobs(extracted_skills, job_postings_data):
             continue
         
         # Debug print to check job skills
-        print("Job Skills:", job_skills)  
+        print("-----------Job Skills:", job_skills)  
         
         # Check if any of the extracted skills match the job skills
         if any(skill.lower() in extracted_skills for skill in job_skills):
-            matching_urls.append(row.get('URL', 'URL not found'))
-    return matching_urls
+            matching_jobs.append(
+            {
+                "title": row.get('Title','Software Engineer').split(','),
+                "company_name": row.get('Company','Company XYZ'),
+                "job_location": row.get('Location','Remote').split(','),
+                "url": row.get('URL','URL not found')
+            })
+
+    return matching_jobs

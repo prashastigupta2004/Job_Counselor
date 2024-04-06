@@ -4,7 +4,8 @@ import pandas as pd
 import pickle
 from src.exception import CustomException
 from src.logger import logging
-from src.preprocessing import preprocess_skills_data, match_skills_with_jobs
+from src.preprocessing import preprocess_skills_data
+from src.utils import match_skills_with_jobs
 from src.resume_parser import extract_skills_from_resume
 
 # Define the train_model function
@@ -38,7 +39,7 @@ def main():
             extracted_skills.append(skills)
 
         # Match skills with jobs
-        matching_urls = match_skills_with_jobs(extracted_skills, processed_job_postings_data)
+        # matching_urls = match_skills_with_jobs(extracted_skills, processed_job_postings_data)
 
         # Train model
         model = train_model(processed_resume_data, processed_job_postings_data)
