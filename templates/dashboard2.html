@@ -143,42 +143,39 @@
                  
                   
                   
-                <section id="analyze">
-                  <div class="container">
-                    <div class="header">
-                        <h1>Smart ATS</h1>
-                        <p>Improve Your Resume ATS</p>
-                        <img src="https://via.placeholder.com/150" alt="Smart ATS Logo">
-                    </div>
-                    <div class="content">
-                        <p>Welcome to Smart ATS - your tool for improving your resume's performance in Applicant Tracking Systems (ATS). ATS is software used by employers to manage the hiring process, and it often scans resumes for keywords and formatting.</p>
-                        <p>With Smart ATS, you can optimize your resume by analyzing job descriptions, pasting them below, and uploading your resume. Our tool will provide feedback on how well your resume matches the job description and suggest improvements.</p>
-                    </div>
-                    <form action="#" method="post">
-                        <div class="form-group">
-                            <label for="job_description">Paste the Job Description</label>
-                            <textarea id="job_description" name="job_description" placeholder="Enter the job description here..."></textarea>
+                  <section id="analyze">
+                    <div class="container">
+                        <div class="header">
+                            <h1>Smart ATS</h1>
+                            <p>Improve Your Resume ATS</p>
+                            <img src="https://via.placeholder.com/150" alt="Smart ATS Logo">
                         </div>
-                        <div class="form-group">
-                            <label for="resume">Upload Your Resume (PDF only)</label>
-                            <input type="file" id="resume" name="resume" accept=".pdf" required>
-                            <small>Please upload the PDF</small>
+                        <div class="content">
+                            <p>Welcome to Smart ATS - your tool for improving your resume's performance in Applicant Tracking Systems (ATS). ATS is software used by employers to manage the hiring process, and it often scans resumes for keywords and formatting.</p>
+                            <p>With Smart ATS, you can optimize your resume by analyzing job descriptions, pasting them below, and uploading your resume. Our tool will provide feedback on how well your resume matches the job description and suggest improvements.</p>
                         </div>
-                        <button type="submit" class="btn">Submit</button>
-                    </form>
-                </div>   
-                    <div class="id">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
-
+                        <form action="/improvecv" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="job_description">Paste the Job Description</label>
+                                <textarea id="job_description" name="job_description" placeholder="Enter the job description here..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="resume">Upload Your Resume (PDF only)</label>
+                                <input type="file" id="resume" name="resume" accept=".pdf" required>
+                                <small>Please upload the PDF</small>
+                            </div>
+                            <button type="submit" class="btn">Submit</button>
+                        </form>
+                    </div>
+                    <div class="matching-jobs">
+                        <!-- <h2 class="alert alert-box">Recommendations </h2> -->
+                        <div id="jobListingContainer" class="row">
+                            <!-- Matching jobs will be dynamically added here -->
+                            
+                        </div>
                     </div>
                 </section>
+                
                 <div class="alert alert-box">
                   ChatBot is on Processing...
                 </div>

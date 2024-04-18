@@ -41,7 +41,7 @@ X_predict_vec = vectorizer.transform(X_predict)
 
 predicted_job_domains = rf_classifier.predict(X_predict_vec)
 
-print(predicted_job_domains)
+# print(predicted_job_domains)
 
 our_data['Predicted_job_domain'] = predicted_job_domains
 
