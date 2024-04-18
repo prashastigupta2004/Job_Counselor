@@ -164,13 +164,20 @@
                     </form>
                 </div>
                 <div class="matching-jobs">
-                    <h2>Matching Jobs</h2>
-                    <div id="jobListingContainer" class="row">
+                    <h2>Recommendations For Your Resume</h2>
                         <!-- Matching jobs will be dynamically added here -->
-                        <div class="alert alert-box">
-                          Output ...
+                        
+                         
+                          <!-- Gemini Response Content -->
+                         Recommendation
+                        <!-- {{gemini_response}} -->
+                        <!-- the above res -->
+                        <div id="responseContainer" class="row">
+
                         </div>
-                    </div>
+
+                          <!-- End of Gemini Response Content -->
+                      
                 </div>
             </section>
             
@@ -185,72 +192,18 @@
 
     <script>
         // Define matchingUrls array using Jinja
-        var matching_Jobs = {{ matching_jobs | tojson  | safe }};
+        var result = {{  gemini_response  | tojson  | safe }};
 
-        // Function to create job listing box
-        function createJobListing(job) {
-            // Create elements for job listing box
-            var jobBox = document.createElement('div');
-            jobBox.classList.add('col-12', 'col-md-6', 'mb-3');  // Adjust column width as per your requirement
-            var jobCard = document.createElement('div');
-            jobCard.classList.add('card');
-            var jobCardBody = document.createElement('div');
-            jobCardBody.classList.add('card-body');
-            var jobTitle = document.createElement('h5');
-            jobTitle.classList.add('card-title');
-            jobTitle.textContent = 'Job Role: ' + job['title'].join(', ');
-            var jobLocation = document.createElement('p');
-            jobLocation.classList.add('card-text');
-            jobLocation.textContent = 'Location: ' + job['job_location'].join(', ');
-            var applyButton = document.createElement('a');
-            applyButton.classList.add('btn', 'btn-primary', 'mr-2');
-            applyButton.setAttribute('href', job['url']);
-            applyButton.setAttribute('target', '_blank');
-            applyButton.textContent = 'Apply';
-            var saveButton = document.createElement('button');
-            saveButton.classList.add('btn', 'btn-secondary');
-            saveButton.textContent = 'Save Job';
-            var labelSkillButtons = document.createElement('button');
-            labelSkillButtons.classList.add('skilllabel', 'label-primary');
-            var skill1=job['job_skills'].slice(0,1);
-            var skill2=job['job_skills'].slice(1,2);
-            labelSkillButtons.textContent = skill1;  
-            var labelSkillButtons2 = document.createElement('button');
-            labelSkillButtons2.classList.add('skilllabel', 'label-primary');
-            //var skill2 = job['job_skills'].split(',')[1].trim(); // Get the second skill
-            labelSkillButtons2.textContent = skill2;
+        
+        /*
+        as abobe out put is of form of a para it will be parsing para as the response is separated by ** and ** we will give styles and attributes HTML 
+        by the help of function name as shwoRecommendation()
+        */ 
+        result = result.replace(/\*\*/g, '\n');
 
-            
-
-            // Append elements to job listing box
-            jobCardBody.appendChild(labelSkillButtons);
-            jobCardBody.appendChild(labelSkillButtons2)
-            jobCardBody.appendChild(jobTitle);
-            jobCardBody.appendChild(jobLocation);
-            jobCardBody.appendChild(applyButton);
-            jobCardBody.appendChild(saveButton);
-            jobCard.appendChild(jobCardBody);
-            jobBox.appendChild(jobCard);
-
-            // Append job listing box to container
-            document.getElementById('jobListingContainer').appendChild(jobBox);
-        }
-        let countDiv=0;
-        for (let i = 0; i < matching_Jobs.length; i++) {
-          let jsonString = matching_Jobs[i];
-          jsonString = jsonString.replace(/'/g, '"');
-          jsonString = jsonString.replace(/,\s+'/g, ", ");
-          jsonString = jsonString.replace(/:\s+'/g, ": ");
-          var jsonObject = JSON.parse(jsonString);
-          createJobListing(jsonObject);
-          countDiv++;
-          if (countDiv > 10) {
-              break;
-          }
-      }
+// Display the modified paragraph
+console.log(result);
       
-        // Create job listing boxes for each URL
-
       </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

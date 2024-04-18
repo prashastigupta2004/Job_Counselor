@@ -8,6 +8,7 @@ import json
 load_dotenv() ## load all our environment variables
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+ 
 
 def get_gemini_response(job_description, resume_text):
     model = genai.GenerativeModel('gemini-pro')
@@ -17,7 +18,7 @@ def get_gemini_response(job_description, resume_text):
     and big data engineering. Your task is to evaluate the resume based on the given job description.
     You must consider the job market is very competitive and you should provide 
     the best assistance for improving the resumes. Assign the percentage Matching based 
-    on JD and the missing keywords with high accuracy.
+    on JD and the missing keywords with high accuracy. 
     resume: {resume_text}
     description: {job_description}
     """

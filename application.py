@@ -1,10 +1,14 @@
-from flask import Flask, jsonify, render_template, request, redirect, url_for
+from flask import Flask, jsonify, render_template, request, redirect, send_file, url_for
 import os
 import uuid
 import pandas as pd
 from src.resume_parser import extract_text_from_pdf, extract_skills  # Import the necessary functions
 from src.utils import match_skills_with_jobs
 from src.ats_checker import get_gemini_response , input_pdf_text
+
+pdf_folder = 'uploads'
+pdf_filename = 'example.pdf'
+
 
 
 app = Flask(__name__)
@@ -62,7 +66,10 @@ def improvementcv():
         resume.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
           # Extract skills from the uploaded resume
         resume_text = extract_text_from_pdf(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        pdf_filename = filename
         # Get job description from the form
+
         job_description = request.form['job_description']
      # Get Gemini response for ATS recommendation
         gemini_response = get_gemini_response(job_description, resume_text)
@@ -70,18 +77,7 @@ def improvementcv():
         return render_template('gemini_modal.html', gemini_response=gemini_response)
 
 
-@app.route('/checkjob',methods=['POST'])
-def checkjob():
-     if 'job_skills' in request.form:
-        job_skills = request.form['job_skills']
-        # Process the job skills data as needed
-        # For example, you can print it to the console or perform any other operations
-
-        # Once processed, you can send back a response to the frontend
-        return jsonify({'message': 'Job skills received successfully'})
-     else:
-        return jsonify({'error': 'Job skills not found in the request'})
-
+ 
 @app.route('/home')
 def home():
     matching_jobs = request.args.getlist('matching_jobs')
@@ -90,9 +86,20 @@ def home():
 def dash():
     return render_template('dashboard2.html')
 
+@app.route('/show_pdf')
+def show_pdf():
+    # Path to your PDF file
+    
+ # Replace this with the actual path to your PDF file
+     pdf_path = os.path.join(app.root_path, pdf_folder, pdf_filename)
+
+    # Return the PDF file
+     return send_file(pdf_path)
+
 @app.route('/atsresume')
 def atresume():
     return render_template('atsresume.html')
+
 
 
 if __name__ == '__main__':
