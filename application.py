@@ -45,10 +45,10 @@ def upload_file():
 @app.route('/home')
 def home():
     matching_jobs = request.args.getlist('matching_jobs')
-    return render_template('home.html', matching_jobs=matching_jobs)
+    return render_template('result1.html', matching_jobs=matching_jobs)
 @app.route('/dashboard')
 def dash():
-    return render_template('index.html')
+    return render_template('dashboard2.html')
 
 
 if __name__ == '__main__':

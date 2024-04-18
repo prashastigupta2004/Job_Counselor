@@ -55,7 +55,8 @@ def match_skills_with_jobs(extracted_skills, job_postings_data):
                 "title": row.get('Title','Software Engineer').split(','),
                 "company_name": row.get('Company','Company XYZ'),
                 "job_location": row.get('Location','Remote').split(','),
-                "url": row.get('URL','URL not found')
+                "url": row.get('URL','URL not found'),
+                "job_skills": row.get('Skills','ReacT').split(','),
             })
 
     return matching_jobs

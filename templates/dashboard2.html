@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Search Dashboard</title>
+  <!-- Bootstrap CSS -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+  <style>
+    /* Additional styles if needed */
+    .jumbotron{
+      background-color: #e7e8ff;
+  }
+  .side-bar{
+    padding: 16px;
+    border-radius: 4px ;
+    margin:  0 auto;
+    text-align: center;
+  }
+  .fix{
+    position: sticky;
+    margin-top: 20px;
+    top: 100px;
+     
+  }
+  .fixNav1{
+    position: sticky;
+    top: 0;
+    /* overflow: hidden; */
+    z-index: 34;
+  }
+  </style>
+</head>
+<body>
+  <!-- Navbar Component -->
+  <div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixNav1  ">
+    <div class="container">
+      <a class="navbar-brand" href="#">Job Search Dashboard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Profile</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                 
+                  Logout
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="mr-1" style="width: 15px;" >
+                    <path d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z"></path>
+                </svg>
+              </a>
+          
+            <!-- <a class="nav-link" href="#">Logout <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="logout"><path d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z"></path></svg></a> -->
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="row">
+      <!-- Sidebar Component -->
+      <div class="col-lg-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fix">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse side-bar" id="navbarSupportedContent">
+            <ul class="navbar-nav flex-column ">
+              <li class="nav-item">
+                <a class="nav-link active" href="/">
+                  <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="-24 -24 448.00 448.00" xml:space="preserve" stroke="#000000" stroke-width="16.800168" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M382.688,182.686H59.116l77.209-77.214c6.764-6.76,6.764-17.726,0-24.485c-6.764-6.764-17.73-6.764-24.484,0L5.073,187.757 c-6.764,6.76-6.764,17.727,0,24.485l106.768,106.775c3.381,3.383,7.812,5.072,12.242,5.072c4.43,0,8.861-1.689,12.242-5.072 c6.764-6.76,6.764-17.726,0-24.484l-77.209-77.218h323.572c9.562,0,17.316-7.753,17.316-17.315 C400.004,190.438,392.251,182.686,382.688,182.686z"></path> </g> </g></svg>
+                  Home</a>
+              </li>
+              <li class="nav-item">
+                <a class=" list-group-item-action active nav-link " href="#suggest">JobListings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#analyze">JobFit Analyzer</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#saved">Saved Jobs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#appied">Applied Jobs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Settings</a>
+              </li>
+              <li type="button" class="btn ">
+                Notifications <span class="badge badge-light">4</span>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        
+      </div>
+
+      <div class="col-lg-9">
+      
+
+        <!-- JobListings Component -->
+
+              <div class="jumbotron">
+                <h1 class="display-4">Upload Your CV</h1>
+                <p class="lead">Please follow the instructions below to upload your CV:</p>
+                <hr class="my-4">
+                <p>Step 1: Prepare your CV in PDF format.</p>
+                <p>Step 2: Click on the "Choose file" button below.</p>
+                <p>Step 3: Select your CV file from your computer.</p>
+                <p>Step 4: Click the "Upload" button to upload your CV.</p>
+                  <!-- <p class="lead">Please upload your resume in PDF format:</p> -->
+                  <form action="/upload" method="post" id="uploadForm" enctype="multipart/form-data">
+                      <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="resumeInput" name="resume" accept=".pdf" onchange="updateFileName()">
+                          <label class="custom-file-label" for="resumeInput" >Choose file</label>
+                      </div>
+                      <br>
+                      <button type="submit"   class="btn btn-primary mt-2" >Upload</button> <span class="lead mt-4">or</span>
+                      <button class="btn btn-info mt-2 ml-3">Generate Your Resume </button>
+      
+                    </form>
+                    
+                    <!-- <h2>Or</h2> -->
+                    
+                  </div>
+                  <div>
+                    <div style="display: none;">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil, ad delectus excepturi exercitationem a quis rerum quaerat vel, officiis repudiandae vero non! Omnis provident deleniti molestiae, dolor fugiat ab. Sequi vero soluta dolor, distinctio dolorum reprehenderit sit magni repellendus praesentium vel temporibus dolorem veniam facilis blanditiis, porro est id provident. Voluptates, ea blanditiis! Dolore sed saepe porro ea sequi aliquid numquam autem blanditiis dolor, quis atque consequuntur corrupti id asperiores accusantium repellat consectetur fugiat iste cumque beatae obcaecati voluptatibus animi. Atque sed veritatis temporibus saepe unde doloribus, beatae quas dolor, corporis tenetur eveniet dolorem asperiores molestiae accusantium distinctio pariatur consequuntur facilis laborum iusto, omnis ducimus non expedita ab a! Ea dicta architecto ad error corporis. Quos explicabo maiores provident eius excepturi? Mollitia nobis repudiandae voluptatibus adipisci eveniet magni praesentium, ipsa eos aperiam architecto nisi dolores maxime illo natus quisquam rerum distinctio accusamus qui! Nihil, dolores! Cum eligendi similique illo laboriosam, doloribus magni quam, excepturi, nemo repudiandae repellendus a! Saepe in, omnis dicta maiores exercitationem veniam aliquam! Animi eum est quidem dicta maxime quam nesciunt distinctio, sunt dignissimos dolorum adipisci tempora atque totam recusandae numquam impedit dolor rem id laudantium reprehenderit iusto eaque consectetur harum! Accusamus est at cumque! Quam, temporibus! Quibusdam nam, natus, fugiat quos facilis ullam aut ipsa quam illum atque quaerat nulla id sed! Tempore, minima sunt voluptas impedit similique facere eos. Ullam rem odit incidunt perferendis dolorem maxime odio qui quasi, velit repellendus modi tempora obcaecati illum nulla magni quaerat quisquam eos tempore, id minus consequatur repudiandae a nobis hic! Corporis temporibus aliquid sunt molestias blanditiis iusto, sequi quos dolorum excepturi, autem, quia magnam unde nam consequatur nulla mollitia tenetur? Temporibus veniam veritatis consequatur velit tempora aspernatur, aperiam sequi, vel fugi
+                      at minima facere sit eum dolore, 
+                      sunt sed ipsum harum totam adipisci? 
+                      Soluta delectus iusto facilis reprehenderit?
+                    </div>
+                  </div>
+                 
+                  
+                  
+                <section id="analyze">
+                  <div class="container">
+                    <div class="header">
+                        <h1>Smart ATS</h1>
+                        <p>Improve Your Resume ATS</p>
+                        <img src="https://via.placeholder.com/150" alt="Smart ATS Logo">
+                    </div>
+                    <div class="content">
+                        <p>Welcome to Smart ATS - your tool for improving your resume's performance in Applicant Tracking Systems (ATS). ATS is software used by employers to manage the hiring process, and it often scans resumes for keywords and formatting.</p>
+                        <p>With Smart ATS, you can optimize your resume by analyzing job descriptions, pasting them below, and uploading your resume. Our tool will provide feedback on how well your resume matches the job description and suggest improvements.</p>
+                    </div>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="job_description">Paste the Job Description</label>
+                            <textarea id="job_description" name="job_description" placeholder="Enter the job description here..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="resume">Upload Your Resume (PDF only)</label>
+                            <input type="file" id="resume" name="resume" accept=".pdf" required>
+                            <small>Please upload the PDF</small>
+                        </div>
+                        <button type="submit" class="btn">Submit</button>
+                    </form>
+                </div>   
+                    <div class="id">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+
+                    </div>
+                </section>
+                <div class="alert alert-box">
+                  ChatBot is on Processing...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+          <script src="sweetalert2.min.js"></script>
+          <script>
+              document.getElementById('uploadForm').addEventListener('file', function(event) {
+                  // Prevent default form submission behavior
+                  event.preventDefault();
+      
+                  // Display success alert
+                  alertSuccess();
+                });
+              function updateFileName() {
+                  const fileInput = document.getElementById('resumeInput');
+                  const fileName = fileInput.files[0].name;
+                  const label = document.querySelector('.custom-file-label');
+                  label.textContent = fileName;  
+                  alertSuccess();
+              }
+              function alertSuccess(){
+                    // Display success alert
+                    let timerInterval;
+      Swal.fire({
+        title:"Uploading file...",
+        html: "completing in <b></b> milliseconds.",
+        timer: 400,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const timer = Swal.getPopup().querySelector("b");
+          timerInterval = setInterval(() => {
+            timer.textContent = `${Swal.getTimerLeft()}`;
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log("I was closed by the timer");
+        }
+      });
+              //      Swal.fire({
+              //        title: 'Success!',
+              //        text: 'File uploaded successfully.',
+              //        icon: 'success',
+              //        confirmButtonText: 'Ok'
+              //    });
+              }
+            
+              
+      
+          </script>
+          <script src="./index.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+          <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

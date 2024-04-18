@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Matcher Dashboard</title>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Paste the provided CSS here */
+        body {
+            --primaryColor: #24698B;
+            --secondaryColor: #ffce00;
+            --fontColour: #1e1e1e;
+            --whiteColour: #fff;
+            --greycolour: #e7e7e7;
+            --darkGreyColour: #5f5f5f;
+            --softPurple: #e7e8ff;
+            --softBlue: #c3e1ff;
+            --softYellow: #fff5cc;
+            --softRed: #ffcbc8;
+            --softGrey: #cccccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            font-size: 'Lato', sans-serif;
+        }
+
+        /* Paste the rest of the provided CSS here */
+        /* Add the rest of the CSS */
+    </style>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="col-md-3 sidebar bg-primary text-light">
+        <h1 class="logo">JobMatcher</h1>
+        <div class="menus">
+            <a href="#" class="nav-link" data-target="home">
+                <ion-icon name="home-outline"></ion-icon>Home
+            </a>
+            <a href="#" class="nav-link" data-target="find-jobs">
+                <ion-icon name="newspaper-outline"></ion-icon>Find Jobs
+            </a>
+            <!-- Add other menu items here -->
+        </div>
+        <div class="profile">
+            <img class="profile-img" src="./image/profile img.jpg" alt="Profile">
+            <div class="profile-name">
+                <h4>Pragya Singh</h4>
+                <p>Data Science</p>
+            </div>
+        </div>
+        <div id="sidebar-content">
+            <!-- Content for sidebar will be dynamically replaced here -->
+        </div>
+    </div>
+
+
+    <!-- Main -->
+    <div class="main" id="main-content">
+        <!-- Main header -->
+        <div class="main-header">
+            <ion-icon class="menu-bar" name="menu-outline"></ion-icon>
+            <div class="search">
+                <input type="text" placeholder="Search your best job here...">
+                <button class="btn-search">
+                    <ion-icon name="search-outline"></ion-icon>
+                </button>
+            </div>
+        </div>
+        <!-- Filter section -->
+        <div class="filter-wrapper">
+            <!-- Filter options -->
+        </div>
+        <!-- Sort section -->
+        <div class="sort">
+            <!-- Sort options -->
+        </div>
+        <div class="wrapper">
+            <!-- Cards go here -->
+        </div>
+    </div>
+
+    <!-- Detail section -->
+
+    <!-- Scripts -->
+    <script src="react.production.min.js"></script>
+    <script src="react-dom.production.min.js"></script>
+    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
