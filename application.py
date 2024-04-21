@@ -6,8 +6,10 @@ from src.resume_parser import extract_text_from_pdf, extract_skills  # Import th
 from src.utils import match_skills_with_jobs
 from src.ats_checker import get_gemini_response , input_pdf_text
 import json
-pdf_folder = 'uploads'
-pdf_filename = 'example.pdf'
+from src.helper import process_gemini_response
+from src.predict_job_domain import predict_job_domain_for_user
+# from utilss.helper import process_gemini_response
+# from utilss.predict_job_domain import predict_job_domain_for_user
 
 
 
@@ -71,7 +73,7 @@ def improvementcv():
         resume.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
           # Extract skills from the uploaded resume
         resume_text = input_pdf_text(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
+        print ("resume text : : ",resume_text)
         pdf_filename = filename
         # Get job description from the form
 
@@ -82,7 +84,7 @@ def improvementcv():
 # Convert JSON string to Python dictionary
 
         try:
-            data_dict = json.loads(gemini_response)
+            data_dict = process_gemini_response(gemini_response)
         except Exception as e:
             print("0000000000000000000000000000")
             print(e)
@@ -104,6 +106,11 @@ def home():
 @app.route('/dashboard')
 def dash():
     return render_template('dashboard2.html')
+
+
+@app.route('/jobdomain', methods=['POST', 'GET'])
+def job_domain():
+    return '<p>Job domain</p>'
 
 @app.route('/show_pdf')
 def show_pdf():
