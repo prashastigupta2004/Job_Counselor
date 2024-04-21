@@ -5,7 +5,7 @@ import pandas as pd
 from src.resume_parser import extract_text_from_pdf, extract_skills  # Import the necessary functions
 from src.utils import match_skills_with_jobs
 from src.ats_checker import get_gemini_response , input_pdf_text
-
+import json
 pdf_folder = 'uploads'
 pdf_filename = 'example.pdf'
 
@@ -49,6 +49,11 @@ def upload_file():
         # Pass the matching URLs to the home template
         return redirect(url_for('home', matching_jobs=matching_jobs))
 
+@app.route('/check', methods=['GET'])
+def check():
+ 
+        return "<h1>Check Works</h1>"
+    
 @app.route('/improvecv',methods=['POST'])
 def improvementcv():
     
@@ -65,7 +70,7 @@ def improvementcv():
         filename = str(uuid.uuid4()) + '.pdf'
         resume.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
           # Extract skills from the uploaded resume
-        resume_text = extract_text_from_pdf(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        resume_text = input_pdf_text(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         pdf_filename = filename
         # Get job description from the form
@@ -73,8 +78,22 @@ def improvementcv():
         job_description = request.form['job_description']
      # Get Gemini response for ATS recommendation
         gemini_response = get_gemini_response(job_description, resume_text)
+        print(gemini_response)
+# Convert JSON string to Python dictionary
 
-        return render_template('gemini_modal.html', gemini_response=gemini_response)
+        try:
+            data_dict = json.loads(gemini_response)
+        except Exception as e:
+            print("0000000000000000000000000000")
+            print(e)
+            return redirect('/')
+
+        # Print the dictionary
+        print(type(data_dict))
+
+
+
+        return render_template('gemini_modal.html', data=data_dict)
 
 
  

@@ -95,7 +95,7 @@
             <!-- Sidebar Component -->
             <div class="col-lg-3">
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action">Home</a>
+                    <a href="/dashboard" class="list-group-item list-group-item-action">Home</a>
                     <a href="#Recomendations" class="list-group-item list-group-item-action active">Recommendation</a>
                     <a href="#" class="list-group-item list-group-item-action">My CV</a>
                     <a href="#" class="list-group-item list-group-item-action">Log out</a>
@@ -110,7 +110,26 @@
                         <div id="jobListingContainer" class="row">
                             <!-- Gemini Recommendation Component -->
                           
-                            <div class="gemini-response">{{ gemini_response }}</div>
+                            <div class="gemini-response">
+                                <h1>Resume Suggestions</h1>
+
+    <p><strong>Percentage Match:</strong> {{ data['percentage_match'] }}</p>
+
+    <p><strong>Missing Keywords:</strong></p>
+    <ul>
+        {% for keyword in data['missing_keywords'] %}
+            <li>{{ keyword }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>Suggestions:</strong></p>
+    <ol>
+        {% for suggestion in data['suggestions'] %}
+            <li>{{ suggestion }}</li>
+        {% endfor %}
+    </ol>
+                            
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,21 +142,7 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    var geminiResponseDiv = document.querySelector('.gemini-response');
-    if (geminiResponseDiv) {
-        var geminiResponseText = geminiResponseDiv.textContent;
-        var letters = geminiResponseText.split('');
-        geminiResponseDiv.textContent = ''; // Clear the text content
-        
-        letters.forEach(function(letter, index) {
-            setTimeout(function() {
-                geminiResponseDiv.textContent += letter;
-            }, 30 * index); // Adjust the delay as needed
-        });
-    }
-});
-
+       
 
  
     </script>

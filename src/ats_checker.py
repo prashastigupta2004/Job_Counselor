@@ -12,16 +12,23 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 def get_gemini_response(job_description, resume_text):
     model = genai.GenerativeModel('gemini-pro')
-    input_prompt = f"""
-    Hey Act Like a skilled or very experienced ATS (Application Tracking System)
-    with a deep understanding of tech field, software engineering, data science, data analysis,
-    and big data engineering. Your task is to evaluate the resume based on the given job description.
-    You must consider the job market is very competitive and you should provide 
-    the best assistance for improving the resumes. Assign the percentage Matching based 
-    on JD and the missing keywords with high accuracy. 
-    resume: {resume_text}
-    description: {job_description}
-    """
+    input_prompt =f"""Hey Act Like a skilled or very experienced ATS (Application Tracking System)
+with a deep understanding of tech field, software engineering, data science, data analysis,
+and big data engineering. Your task is to evaluate the resume based on the given job description.
+You must consider the job market is very competitive and you should provide 
+the best assistance for improving the resumes. Assign the percentage Matching based 
+on JD and the missing keywords with high accuracy. 
+resume_text: {resume_text},
+description: {job_description},
+I want response in json format as follows: '["percentage_match":"","missing_keywords":[array of keywords],"suggestions":[arrnsweray of suggestions]]' which contains objects
+ make sure that dont send empty arrays for missing skills and suggestion, add suggestions also give undefined to empty array for missing skills and missing keywords"""
+    
+
+
+#      I want response in paragraph format in which  each paragraph in html p element. like :<div>
+#    <p>answer </p>  <p>answer </p></div>. dont including headings or * in response
+   
+    
     response = model.generate_content(input_prompt)
     return response.text
 
