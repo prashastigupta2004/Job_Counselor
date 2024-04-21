@@ -9,5 +9,7 @@ python-docx
 PyPDF2 
 PyMuPDF
 joblib
+google.generativeai
+python-dotenv
 # python -m spacy download en_core_web_sm
 #-e .
