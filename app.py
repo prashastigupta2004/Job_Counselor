@@ -53,12 +53,12 @@ def upload_file():
         resume_text = extract_text_from_pdf(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         extracted_skills = extract_skills(resume_text)
 
-
+        job_domain = predict_job_domain_for_user('Engineering,'.join(extracted_skills))
         # Match skills with job postings and get matching URLs
         matching_jobs = match_skills_with_jobs(extracted_skills, job_postings_data)
 
         # Pass the matching URLs to the home template
-        return redirect(url_for('home', matching_jobs=matching_jobs))
+        return redirect(url_for('home', matching_jobs=matching_jobs,job_domain=job_domain))
 
 @app.route('/check', methods=['GET'])
 def check():
@@ -111,7 +111,10 @@ def improvementcv():
 @app.route('/home')
 def home():
     matching_jobs = request.args.getlist('matching_jobs')
-    return render_template('result1.html', matching_jobs=matching_jobs)
+    job_domain = request.args.get('job_domain', 'Unknown')
+    # print("----------->>>>>"+job_domain)
+    job_domain=job_domain.capitalize()
+    return render_template('result1.html', matching_jobs=matching_jobs,job_domain=job_domain)
 @app.route('/dashboard' ,methods=['POST'])
 def dash():
     return render_template('dashboard2.html')
