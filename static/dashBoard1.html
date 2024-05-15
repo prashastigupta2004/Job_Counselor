@@ -139,48 +139,42 @@
              
               
               
-              <section id="analyze">
-                <div class="container">
-                    <div class="header">
-                        <h1>Smart ATS</h1>
-                        <p>Improve Your Resume ATS</p>
-                        <img src="https://via.placeholder.com/150" alt="Smart ATS Logo">
-                    </div>
-                    <div class="content">
-                        <p>Welcome to Smart ATS - your tool for improving your resume's performance in Applicant Tracking Systems (ATS). ATS is software used by employers to manage the hiring process, and it often scans resumes for keywords and formatting.</p>
-                        <p>With Smart ATS, you can optimize your resume by analyzing job descriptions, pasting them below, and uploading your resume. Our tool will provide feedback on how well your resume matches the job description and suggest improvements.</p>
-                    </div>
-                    <form action="/improvecv" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="job_description">Paste the Job Description</label>
-                            <textarea id="job_description" name="job_description" placeholder="Enter the job description here..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="resume">Upload Your Resume (PDF only)</label>
-                            <input type="file" id="resume" name="resume" accept=".pdf" required>
-                            <small>Please upload the PDF</small>
-                        </div>
-                        <button type="submit" class="btn">Submit</button>
-                    </form>
+            <section id="analyze">
+              <div class="container">
+                <div class="header">
+                    <h1>Smart ATS</h1>
+                    <p>Improve Your Resume ATS</p>
+                    <img src="https://via.placeholder.com/150" alt="Smart ATS Logo">
                 </div>
-                <div class="matching-jobs">
-                    <h2>Recommendations For Your Resume</h2>
-                        <!-- Matching jobs will be dynamically added here -->
-                        
-                         
-                          <!-- Gemini Response Content -->
-                         Recommendation
-                        <!-- {{gemini_response}} -->
-                        <!-- the above res -->
-                        <div id="responseContainer" class="row">
+                <div class="content">
+                    <p>Welcome to Smart ATS - your tool for improving your resume's performance in Applicant Tracking Systems (ATS). ATS is software used by employers to manage the hiring process, and it often scans resumes for keywords and formatting.</p>
+                    <p>With Smart ATS, you can optimize your resume by analyzing job descriptions, pasting them below, and uploading your resume. Our tool will provide feedback on how well your resume matches the job description and suggest improvements.</p>
+                </div>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="job_description">Paste the Job Description</label>
+                        <textarea id="job_description" name="job_description" placeholder="Enter the job description here..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="resume">Upload Your Resume (PDF only)</label>
+                        <input type="file" id="resume" name="resume" accept=".pdf" required>
+                        <small>Please upload the PDF</small>
+                    </div>
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+            </div>   
+                <div class="id">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore ducimus distinctio doloremque necessitatibus, optio fugiat iure assumenda perferendis sequi cum, voluptatum laudantium saepe dolorem ad quae unde commodi eaque maiores?
 
-                        </div>
-
-                          <!-- End of Gemini Response Content -->
-                      
                 </div>
             </section>
-            
             <div class="alert alert-box">
               ChatBot is on Processing...
             </div>
@@ -192,18 +186,72 @@
 
     <script>
         // Define matchingUrls array using Jinja
-        var result = {{  gemini_response  | tojson  | safe }};
+        var matching_Jobs = {{ matching_jobs | tojson  | safe }};
 
-        
-        /*
-        as abobe out put is of form of a para it will be parsing para as the response is separated by ** and ** we will give styles and attributes HTML 
-        by the help of function name as shwoRecommendation()
-        */ 
-        result = result.replace(/\*\*/g, '\n');
+        // Function to create job listing box
+        function createJobListing(job) {
+            // Create elements for job listing box
+            var jobBox = document.createElement('div');
+            jobBox.classList.add('col-12', 'col-md-6', 'mb-3');  // Adjust column width as per your requirement
+            var jobCard = document.createElement('div');
+            jobCard.classList.add('card');
+            var jobCardBody = document.createElement('div');
+            jobCardBody.classList.add('card-body');
+            var jobTitle = document.createElement('h5');
+            jobTitle.classList.add('card-title');
+            jobTitle.textContent = 'Job Role: ' + job['title'].join(', ');
+            var jobLocation = document.createElement('p');
+            jobLocation.classList.add('card-text');
+            jobLocation.textContent = 'Location: ' + job['job_location'].join(', ');
+            var applyButton = document.createElement('a');
+            applyButton.classList.add('btn', 'btn-primary', 'mr-2');
+            applyButton.setAttribute('href', job['url']);
+            applyButton.setAttribute('target', '_blank');
+            applyButton.textContent = 'Apply';
+            var saveButton = document.createElement('button');
+            saveButton.classList.add('btn', 'btn-secondary');
+            saveButton.textContent = 'Save Job';
+            var labelSkillButtons = document.createElement('button');
+            labelSkillButtons.classList.add('skilllabel', 'label-primary');
+            var skill1=job['job_skills'].slice(0,1);
+            var skill2=job['job_skills'].slice(1,2);
+            labelSkillButtons.textContent = skill1;  
+            var labelSkillButtons2 = document.createElement('button');
+            labelSkillButtons2.classList.add('skilllabel', 'label-primary');
+            //var skill2 = job['job_skills'].split(',')[1].trim(); // Get the second skill
+            labelSkillButtons2.textContent = skill2;
 
-// Display the modified paragraph
-console.log(result);
+            
+
+            // Append elements to job listing box
+            jobCardBody.appendChild(labelSkillButtons);
+            jobCardBody.appendChild(labelSkillButtons2)
+            jobCardBody.appendChild(jobTitle);
+            jobCardBody.appendChild(jobLocation);
+            jobCardBody.appendChild(applyButton);
+            jobCardBody.appendChild(saveButton);
+            jobCard.appendChild(jobCardBody);
+            jobBox.appendChild(jobCard);
+
+            // Append job listing box to container
+            document.getElementById('jobListingContainer').appendChild(jobBox);
+        }
+        let countDiv=0;
+        for (let i = 0; i < matching_Jobs.length; i++) {
+          let jsonString = matching_Jobs[i];
+          jsonString = jsonString.replace(/'/g, '"');
+          jsonString = jsonString.replace(/,\s+'/g, ", ");
+          jsonString = jsonString.replace(/:\s+'/g, ": ");
+          var jsonObject = JSON.parse(jsonString);
+          createJobListing(jsonObject);
+          countDiv++;
+          if (countDiv > 10) {
+              break;
+          }
+      }
       
+        // Create job listing boxes for each URL
+
       </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -100,7 +100,7 @@
                             <h3 class="mb-4">
                                 <strong>Sign-Up</strong>
                             </h3>
-                          <form>
+                          <form action="/dashboard" method="post">
 
                             <!-- Email input -->
                            
@@ -182,7 +182,7 @@
                             <h3 class="mb-4 mx-auto">
                                 <strong>Sign-In</strong>
                             </h3>
-                          <form>
+                            <form action="/dashboard" method="post">
                             <!-- Email input -->
                             <div class="form-outline mb-4">
                               <input type="email" id="form1Example13" class="form-control form-control-lg" />
@@ -231,6 +231,27 @@
             </div>
         </div>
     </div>
+</div>
+<button class="chatbot-toggler">
+  <span class="material-symbols-rounded">mode_comment</span>
+  <span class="material-symbols-outlined">close</span>
+</button>
+<div class="chatbot">
+  <header>
+    
+    <h2><span class="material-symbols-outlined">smart_toy</span> JobGenie .AI</h2>
+    <span class="close-btn material-symbols-outlined">close</span>
+  </header>
+  <ul class="chatbox">
+    <li class="chat incoming">
+      <span class="material-symbols-outlined">smart_toy</span>
+      <p>Hi there 👋<br>How can I help you today?</p>
+    </li>
+  </ul>
+  <div class="chat-input">
+    <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+    <span id="send-btn" class="material-symbols-rounded">send</span>
+  </div>
 </div>
 
 

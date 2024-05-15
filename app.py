@@ -112,23 +112,27 @@ def improvementcv():
 def home():
     matching_jobs = request.args.getlist('matching_jobs')
     return render_template('result1.html', matching_jobs=matching_jobs)
-@app.route('/dashboard')
+@app.route('/dashboard' ,methods=['POST'])
 def dash():
+    return render_template('dashboard2.html')
+
+@app.route('/dashboard')
+def dash2():
     return render_template('dashboard2.html')
 
 
 
 
 
-@app.route('/show_pdf')
-def show_pdf():
-    # Path to your PDF file
+# @app.route('/show_pdf')
+# def show_pdf():
+#     # Path to your PDF file
     
- # Replace this with the actual path to your PDF file
-     pdf_path = os.path.join(app.root_path, pdf_folder, pdf_filename)
+#  # Replace this with the actual path to your PDF file
+#      pdf_path = os.path.join(app.root_path, pdf_folder, pdf_filename)
 
-    # Return the PDF file
-     return send_file(pdf_path)
+#     # Return the PDF file
+#      return send_file(pdf_path)
 
 @app.route('/atsresume')
 def atresume():

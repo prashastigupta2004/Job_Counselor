@@ -18,8 +18,8 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 def get_gemini_response(job_description, resume_text):
     model = genai.GenerativeModel('gemini-pro')
     input_prompt =f""" you are software developer mentor and a student come to you , he want to beacome {job_description} developer and he gave you following resume data to you:{resume_text}.Your duty is to give him suggestions to improve his resume data.i Want following type of response.
-:The response should be in json format as follows: '"percentage_match":"which is a number","missing_keywords":[array of missing keywords],"suggestions":[array of suggestions]', this should be in json object having follwing keys
- make sure that dont send empty arrays for missing skills and suggestion."""
+:The response should be in json format as follows: '"percentage_match": which is a number,"missing_keywords":[array of missing keywords],"suggestions":[array of suggestions]', this should be in json object having follwing keys
+ make sure that dont send empty arrays for missing skills and suggestion.  if null and empty string in value of json  Give positive feed back in same manner  With Displaying name of candidate"""
     
 
 
