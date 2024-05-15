@@ -1,49 +1,47 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score
+import pickle
 
-# Load the first dataset for training
-data = pd.read_csv('skill_dataset1.csv')
+def train_classifier():
+    # Load the first dataset for training
+    data = pd.read_csv('skill_dataset1.csv')
 
-# Extract features (skills) and target variable (job domains)
-X = data['Skills']
-y = data['Job_domain']
+    # Extract features (skills) and target variable (job domains)
+    X = data['Skills']
+    y = data['Job_domain']
 
-# Convert skills into TF-IDF features
-vectorizer = TfidfVectorizer()
-X_tfidf = vectorizer.fit_transform(X)
+    # Convert skills into TF-IDF features
+    vectorizer = TfidfVectorizer()
+    X_tfidf = vectorizer.fit_transform(X)
 
-# Train the Support Vector Machine (SVM) classifier
-svm_classifier = SVC(kernel='linear')
-svm_classifier.fit(X_tfidf, y)
+    # Train the Support Vector Machine (SVM) classifier
+    svm_classifier = SVC(kernel='linear')
+    svm_classifier.fit(X_tfidf, y)
 
-# Load the second dataset for testing
-test_data = pd.read_csv('final_dataset 1.csv')
+    # Save the trained model and vectorizer
+    with open('svm_classifier_model.pkl', 'wb') as file:
+        pickle.dump(svm_classifier, file)
+    with open('vectorizer.pkl', 'wb') as file:
+        pickle.dump(vectorizer, file)
 
-# Replace missing values with empty strings
-test_data['Skills'] = test_data['Skills'].fillna('')
+def predict_domain_for_user(user_skills):
+    # Load the trained SVM classifier and TF-IDF vectorizer
+    with open('svm_classifier_model.pkl', 'rb') as file:
+        loaded_model = pickle.load(file)
+    with open('vectorizer.pkl', 'rb') as file:
+        loaded_vectorizer = pickle.load(file)
 
-# Extract skills from the "Skills" column of the second dataset
-test_skills = test_data['Skills']
+    # Preprocess the user skills
+    preprocessed_skills = user_skills.lower()  # You can add more preprocessing steps here
 
-# Transform skills into TF-IDF features using the same vectorizer trained on the first dataset
-X_test_tfidf = vectorizer.transform(test_skills)
+    # Transform preprocessed skills into TF-IDF features using the loaded vectorizer
+    skills_tfidf = loaded_vectorizer.transform([preprocessed_skills])
 
-# Predict job domains on the test set
-y_pred_test = svm_classifier.predict(X_test_tfidf)
+    # Predict the job domain for the user skills
+    predicted_domain = loaded_model.predict(skills_tfidf)
 
-# Convert any float values in the 'Job_domain' column to strings
-test_data['Job_domain'] = test_data['Job_domain'].astype(str)
+    return predicted_domain[0]
 
-# Calculate accuracy on the second dataset
-accuracy = accuracy_score(test_data['Job_domain'], y_pred_test)
-print("Accuracy on the Second Dataset:", accuracy)
-
-
-# Add predicted job domains to the test dataset
-test_data['Predicted_Job_domain'] = y_pred_test
-
-# Print the predicted job domains for the second dataset
-print("Predicted Job Domains for Second Dataset:")
-print(test_data[['Title', 'Skills', 'Predicted_Job_domain','Job_domain']])
+# Call the train_classifier() function to train the classifier and save the model and vectorizer
+train_classifier()
