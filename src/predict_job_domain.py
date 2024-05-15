@@ -1,7 +1,7 @@
 import pickle
 def predict_job_domain_for_user(skills):
 
-    with open('job_domain_rf_model1.pkl', 'rb') as file:
+    with open('svm_classifier_model.pkl', 'rb') as file:
         loaded_model = pickle.load(file)
 
     # Load the saved vectorizer from the pickle file
