@@ -8,6 +8,8 @@ from src.ats_checker import get_gemini_response , input_pdf_text
 import json
 from src.helper import process_gemini_response
 from src.predict_job_domain import predict_job_domain_for_user
+from src.gemini import get_chat_response 
+ 
 # from utilss.helper import process_gemini_response
 # from utilss.predict_job_domain import predict_job_domain_for_user
 
@@ -53,7 +55,7 @@ def upload_file():
         resume_text = extract_text_from_pdf(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         extracted_skills = extract_skills(resume_text)
 
-        job_domain = predict_job_domain_for_user('Engineering,'.join(extracted_skills))
+        job_domain = predict_job_domain_for_user('web developer,'.join(extracted_skills))
         # Match skills with job postings and get matching URLs
         matching_jobs = match_skills_with_jobs(extracted_skills, job_postings_data)
 
@@ -126,6 +128,12 @@ def dash2():
 
 
 
+@app.route('/chat', methods=['POST'])  # Route to handle chat messages
+def chat():
+    user_message = request.json.get('message')  # Extract the user message from the request
+    # Pass the user message to the chatbot model and get the response
+    bot_response = get_chat_response(user_message)
+    return jsonify({'response': bot_response})  # Return the bot response as JSON
 
 # @app.route('/show_pdf')
 # def show_pdf():
