@@ -66,5 +66,8 @@ chat_session = model.start_chat(
 )
 
 def get_chat_response(user_message):
+    print("funcion called with user")
+    print(user_message)
     response = chat_session.send_message(user_message)
+    print(response.text)
     return response.text

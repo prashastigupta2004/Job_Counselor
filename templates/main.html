@@ -258,6 +258,21 @@
   </div>
 </div>
 <script>
+ async  function   getResponse(userInput){
+    try{
+      const resp=await  fetch('http://127.0.0.1:5000/chat', {
+        method: 'POST',
+       headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ message: userInput }),
+      })
+      return resp
+    }
+    catch(error){
+      console.log(error);
+      throw Error("error while getting response from server")
+    }
+  }
+
   document.getElementById('send-btn').addEventListener('click', function () {
     const userInput = document.querySelector('.chat-input textarea').value;
     if (userInput.trim()) {
@@ -268,24 +283,33 @@
       document.querySelector('.chatbox').appendChild(userMessageElem);
 
       // Send message to server
-      fetch('/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: userInput }),
-      })
-        .then(response => response.json())
-        .then(data => {
-          // Display bot response
-          const botMessageElem = document.createElement('li');
-          botMessageElem.className = 'chat incoming';
-          botMessageElem.innerHTML = `<span class="material-symbols-outlined">smart_toy</span><p>${data.response}</p>`;
-          document.querySelector('.chatbox').appendChild(botMessageElem);
-        })
-        .catch(error => console.error('Error:', error));
 
-      // Clear the textarea
+      getResponse(userInput).then((resp=>resp.json())).then(data => {
+        // Display bot response
+        console.log(data,"DFSGDF");
+        const botMessageElem = document.createElement('li');
+        botMessageElem.className = 'chat incoming';
+        botMessageElem.innerHTML = `<span class="material-symbols-outlined">smart_toy</span><p>${data.response}</p>`;
+        document.querySelector('.chatbox').appendChild(botMessageElem);
+      })
+      .catch(error => console.error('Error:', error));
+     // 
+     // fetch('http://127.0.0.1:5000/chat', {
+     //   method: 'POST',
+     //  
+     //   body: JSON.stringify({ message: userInput }),
+     // })
+     //   .then(response => response.json())
+     //   .then(data => {
+     //     // Display bot response
+     //     const botMessageElem = document.createElement('li');
+     //     botMessageElem.className = 'chat incoming';
+     //     botMessageElem.innerHTML = `<span class="material-symbols-outlined">smart_toy</span><p>${data.response}</p>`;
+     //     document.querySelector('.chatbox').appendChild(botMessageElem);
+     //   })
+     //   .catch(error => console.error('Error:', error));
+
+     // // Clear the textarea
       document.querySelector('.chat-input textarea').value = '';
     }
   });

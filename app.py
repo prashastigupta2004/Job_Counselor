@@ -55,7 +55,7 @@ def upload_file():
         resume_text = extract_text_from_pdf(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         extracted_skills = extract_skills(resume_text)
 
-        job_domain = predict_job_domain_for_user('web developer,'.join(extracted_skills))
+        job_domain = predict_job_domain_for_user(extracted_skills)
         # Match skills with job postings and get matching URLs
         matching_jobs = match_skills_with_jobs(extracted_skills, job_postings_data)
 
@@ -130,10 +130,19 @@ def dash2():
 
 @app.route('/chat', methods=['POST'])  # Route to handle chat messages
 def chat():
-    user_message = request.json.get('message')  # Extract the user message from the request
-    # Pass the user message to the chatbot model and get the response
-    bot_response = get_chat_response(user_message)
-    return jsonify({'response': bot_response})  # Return the bot response as JSON
+    if request.method == 'POST':
+      
+        user_message = request.json.get('message')  # Extract the user message from the request
+        # Pass the user message to the chatbot model and get the response
+        try:
+            bot_response = get_chat_response(user_message)
+        except Exception as e:
+            print("Error", e)
+            bot_response = "none"
+
+        return jsonify({'response': bot_response})  # Return the bot response as JSON
+    else:
+        return jsonify({'response': "none"})
 
 # @app.route('/show_pdf')
 # def show_pdf():
