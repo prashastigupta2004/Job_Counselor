@@ -113,7 +113,7 @@
                             <div class="gemini-response">
                                 <h1>Resume Suggestions</h1>
 
-    <p><strong>Percentage Match:</strong> {{ data['percentage_match'] }}</p>
+    <p><strong>Percentage Match:</strong> {{ data['percentage_match'] }}.0%</p>
 
     <p><strong>Missing Keywords:</strong></p>
     <ul>
@@ -125,9 +125,16 @@
     <p><strong>Suggestions:</strong></p>
     <ol>
         {% for suggestion in data['suggestions'] %}
+            
             <li>{{ suggestion }}</li>
         {% endfor %}
     </ol>
+    <!-- {% if data['percentage_match'] > 90 %}
+    <div class="good-to-apply">
+      <h4>Good To Apply</h4>
+    </div>
+  {% endif %} -->
+    
                             
                             </div>
                         </div>
@@ -135,6 +142,8 @@
                 </div>
                 <div class="alert alert-box">
                     ChatBot is on Processing...
+
+                    
                 </div>
             </div>
 

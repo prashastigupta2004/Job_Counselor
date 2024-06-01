@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Job Search Dashboard</title>
   <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/static/botstyle.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+  <script src="/static/bot.js" defer></script>
+  
   
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="path/to/bootstrap/css/bootstrap.min.css">
@@ -32,6 +38,50 @@
     /* overflow: hidden; */
     z-index: 34;
   }
+  .chat {
+    
+    margin: 0 auto;
+    padding: 20px;
+}
+.chat-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+.message {
+    margin-bottom: 10px;
+}
+.user-message {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: right;
+}
+svg{
+  color: #000;
+}
+.assistant-message {
+    background-color: #e6e6e6;
+    border-radius: 10px;
+    padding: 10px;
+}
+.input-container {
+    display: flex;
+}
+.input-container input[type="text"] {
+    flex: 1;
+    padding: 10px;
+}
+.input-container button {
+    padding: 10px 20px;
+    background-color:#ffffff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+  
   </style>
 </head>
 <body>
@@ -178,7 +228,7 @@
                                
                                   </form>
                                   <form action="/check" method="GET">
-                                    <button type="submit" class="btn btn-info">Existing Button</button>
+                                    <!-- <button type="submit" class="btn btn-info">Existing Button</button> -->
                                    </form>
                             </div>
                         </div>
@@ -191,14 +241,142 @@
                 </section>
                 
                 
-                <div class="alert alert-box">
-                  ChatBot is on Processing...
+                <div class="chatbot">
+                  <header>
+                    <h2><span class="material-symbols-outlined">smart_toy</span> JobMentee .AI</h2>
+                    <span class="close-btn material-symbols-outlined effect">close</span>
+                  </header>
+                  <ul class="chatbox">
+                    <li class="chat incoming">
+                      <span class="material-symbols-outlined">smart_toy</span>
+                      <p>Hi there 👋<br>How can I help you today?</p>
+                    </li>
+                  </ul>
+                  <div class="chat-input">
+                    <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
+                    <span id="send-btn" class="material-symbols-rounded">send</span>
+                  </div>
                 </div>
+                <script>
+                 async  function   getResponse(userInput){
+                    try{
+                      const resp=await  fetch('http://127.0.0.1:5000/chat', {
+                        method: 'POST',
+                       headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ message: userInput }),
+                      })
+                      return resp
+                    }
+                    catch(error){
+                      console.log(error);
+                      throw Error("error while getting response from server")
+                    }
+                  }
+                
+                  document.getElementById('send-btn').addEventListener('click', function () {
+                    const userInput = document.querySelector('.chat-input textarea').value;
+                    if (userInput.trim()) {
+                      // Display user message
+                      const userMessageElem = document.createElement('li');
+                      userMessageElem.className = 'chat outgoing';
+                      userMessageElem.innerHTML = `<p>${userInput}</p>`;
+                      document.querySelector('.chatbox').appendChild(userMessageElem);
+                
+                      // Send message to server
+                
+                      getResponse(userInput).then((resp=>resp.json())).then(data => {
+                        // Display bot response
+                        console.log(data,"DFSGDF");
+                        const botMessageElem = document.createElement('li');
+                        botMessageElem.className = 'chat incoming';
+                        botMessageElem.innerHTML = `<span class="material-symbols-outlined">smart_toy</span><p>${data.response}</p>`;
+                        document.querySelector('.chatbox').appendChild(botMessageElem);
+                      })
+                      .catch(error => console.error('Error:', error));
+                     // 
+                     // fetch('http://127.0.0.1:5000/chat', {
+                     //   method: 'POST',
+                     //  
+                     //   body: JSON.stringify({ message: userInput }),
+                     // })
+                     //   .then(response => response.json())
+                     //   .then(data => {
+                     //     // Display bot response
+                     //     const botMessageElem = document.createElement('li');
+                     //     botMessageElem.className = 'chat incoming';
+                     //     botMessageElem.innerHTML = `<span class="material-symbols-outlined">smart_toy</span><p>${data.response}</p>`;
+                     //     document.querySelector('.chatbox').appendChild(botMessageElem);
+                     //   })
+                     //   .catch(error => console.error('Error:', error));
+                
+                     // // Clear the textarea
+                      document.querySelector('.chat-input textarea').value = '';
+                    }
+                  });
+                </script>
               </div>
             </div>
           </div>
         </div>
-      
+        
+        <script>
+          async  function   getResponse(userInput){
+             try{
+               const resp=await  fetch('http://127.0.0.1:5000/chat', {
+                 method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                 body: JSON.stringify({ message: userInput }),
+               })
+               return resp
+             }
+             catch(error){
+               console.log(error);
+               throw Error("error while getting response from server")
+             }
+           }
+         
+           document.getElementById('send-btn').addEventListener('click', function () {
+             const userInput = document.querySelector('.chat-input textarea').value;
+             if (userInput.trim()) {
+               // Display user message
+               const userMessageElem = document.createElement('li');
+               userMessageElem.className = 'chat outgoing';
+               userMessageElem.innerHTML = `<p>${userInput}</p>`;
+               document.querySelector('.chatbox').appendChild(userMessageElem);
+         
+               // Send message to server
+         
+               getResponse(userInput).then((resp=>resp.json())).then(data => {
+                 // Display bot response
+                 console.log(data,"DFSGDF");
+                 const botMessageElem = document.createElement('li');
+                 botMessageElem.className = 'chat incoming';
+                 botMessageElem.innerHTML = `<span class="material-symbols-outlined">smart_toy</span><p>${data.response}</p>`;
+                 document.querySelector('.chatbox').appendChild(botMessageElem);
+               })
+               .catch(error => console.error('Error:', error));
+              // 
+              // fetch('http://127.0.0.1:5000/chat', {
+              //   method: 'POST',
+              //  
+              //   body: JSON.stringify({ message: userInput }),
+              // })
+              //   .then(response => response.json())
+              //   .then(data => {
+              //     // Display bot response
+              //     const botMessageElem = document.createElement('li');
+              //     botMessageElem.className = 'chat incoming';
+              //     botMessageElem.innerHTML = `<span class="material-symbols-outlined">smart_toy</span><p>${data.response}</p>`;
+              //     document.querySelector('.chatbox').appendChild(botMessageElem);
+              //   })
+              //   .catch(error => console.error('Error:', error));
+         
+              // // Clear the textarea
+               document.querySelector('.chat-input textarea').value = '';
+             }
+           });
+         </script>
+         
           <script src="sweetalert2.min.js"></script>
           <script>
               document.getElementById('uploadForm').addEventListener('file', function(event) {

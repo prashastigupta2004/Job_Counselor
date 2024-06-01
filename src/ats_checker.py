@@ -8,20 +8,18 @@ import json
 load_dotenv() ## load all our environment variables
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
- 
+
+# Hey Act Like a skilled or very experienced ATS (Application Tracking System)
+# with a deep understanding of tech field. Your task is to evaluate the resume based on the given job description.
+# You must consider the job market is very competitive and you should provide 
+# the best assistance for improving the resumes. Assign the percentage Matching based 
+# on Job Description and the missing keywords with high accuracy.
 
 def get_gemini_response(job_description, resume_text):
     model = genai.GenerativeModel('gemini-pro')
-    input_prompt =f"""Hey Act Like a skilled or very experienced ATS (Application Tracking System)
-with a deep understanding of tech field, software engineering, data science, data analysis,
-and big data engineering. Your task is to evaluate the resume based on the given job description.
-You must consider the job market is very competitive and you should provide 
-the best assistance for improving the resumes. Assign the percentage Matching based 
-on JD and the missing keywords with high accuracy. 
-resume_text: {resume_text},
-description: {job_description},
-I want response in json format as follows: '["percentage_match":"","missing_keywords":[array of keywords],"suggestions":[arrnsweray of suggestions]]' which contains objects
- make sure that dont send empty arrays for missing skills and suggestion, add suggestions also give undefined to empty array for missing skills and missing keywords"""
+    input_prompt =f""" you are software developer mentor and a student come to you , he want to beacome {job_description} developer and he gave you following resume data to you:{resume_text}.Your duty is to give him suggestions to improve his resume data.i Want following type of response.
+:The response should be in json format as follows: '"percentage_match": which is a number,"missing_keywords":[array of missing keywords],"suggestions":[array of suggestions]', this should be in json object having follwing keys
+ make sure that dont send empty arrays for missing skills and suggestion.  if null and empty string in value of json  Give positive feed back in same manner  With Displaying name of candidate"""
     
 
 

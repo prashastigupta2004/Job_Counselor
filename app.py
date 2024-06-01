@@ -6,8 +6,12 @@ from src.resume_parser import extract_text_from_pdf, extract_skills  # Import th
 from src.utils import match_skills_with_jobs
 from src.ats_checker import get_gemini_response , input_pdf_text
 import json
-pdf_folder = 'uploads'
-pdf_filename = 'example.pdf'
+from src.helper import process_gemini_response
+from src.predict_job_domain import predict_job_domain_for_user
+from src.gemini import get_chat_response 
+ 
+# from utilss.helper import process_gemini_response
+# from utilss.predict_job_domain import predict_job_domain_for_user
 
 
 
@@ -20,9 +24,18 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 job_postings_dataset_path = "notebooks/data/final_datasets.csv"
 job_postings_data = pd.read_csv(job_postings_dataset_path)
 
-@app.route('/')
+@app.route('/',methods=['POST','GET'])
 def main():
-    return render_template('main.html')
+
+    if(request.method == 'POST'):
+        skills=request.form.get('skills')
+    
+        # print('--------------------------------',skills+'Predictions for job domain')
+        job_domain=predict_job_domain_for_user(skills)
+        return  render_template('main.html', job_domain=job_domain)
+    else:
+
+        return render_template('main.html')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -42,12 +55,12 @@ def upload_file():
         resume_text = extract_text_from_pdf(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         extracted_skills = extract_skills(resume_text)
 
-
+        job_domain = predict_job_domain_for_user(extracted_skills)
         # Match skills with job postings and get matching URLs
         matching_jobs = match_skills_with_jobs(extracted_skills, job_postings_data)
 
         # Pass the matching URLs to the home template
-        return redirect(url_for('home', matching_jobs=matching_jobs))
+        return redirect(url_for('home', matching_jobs=matching_jobs,job_domain=job_domain))
 
 @app.route('/check', methods=['GET'])
 def check():
@@ -71,7 +84,7 @@ def improvementcv():
         resume.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
           # Extract skills from the uploaded resume
         resume_text = input_pdf_text(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
+        print ("resume text : : ",resume_text)
         pdf_filename = filename
         # Get job description from the form
 
@@ -82,7 +95,7 @@ def improvementcv():
 # Convert JSON string to Python dictionary
 
         try:
-            data_dict = json.loads(gemini_response)
+            data_dict = process_gemini_response(gemini_response)
         except Exception as e:
             print("0000000000000000000000000000")
             print(e)
@@ -100,20 +113,46 @@ def improvementcv():
 @app.route('/home')
 def home():
     matching_jobs = request.args.getlist('matching_jobs')
-    return render_template('result1.html', matching_jobs=matching_jobs)
-@app.route('/dashboard')
+    job_domain = request.args.get('job_domain', 'Unknown')
+    # print("----------->>>>>"+job_domain)
+    job_domain=job_domain.capitalize()
+    return render_template('result1.html', matching_jobs=matching_jobs,job_domain=job_domain)
+@app.route('/dashboard' ,methods=['POST'])
 def dash():
     return render_template('dashboard2.html')
 
-@app.route('/show_pdf')
-def show_pdf():
-    # Path to your PDF file
-    
- # Replace this with the actual path to your PDF file
-     pdf_path = os.path.join(app.root_path, pdf_folder, pdf_filename)
+@app.route('/dashboard')
+def dash2():
+    return render_template('dashboard2.html')
 
-    # Return the PDF file
-     return send_file(pdf_path)
+
+
+
+@app.route('/chat', methods=['POST'])  # Route to handle chat messages
+def chat():
+    if request.method == 'POST':
+      
+        user_message = request.json.get('message')  # Extract the user message from the request
+        # Pass the user message to the chatbot model and get the response
+        try:
+            bot_response = get_chat_response(user_message)
+        except Exception as e:
+            print("Error", e)
+            bot_response = "none"
+
+        return jsonify({'response': bot_response})  # Return the bot response as JSON
+    else:
+        return jsonify({'response': "none"})
+
+# @app.route('/show_pdf')
+# def show_pdf():
+#     # Path to your PDF file
+    
+#  # Replace this with the actual path to your PDF file
+#      pdf_path = os.path.join(app.root_path, pdf_folder, pdf_filename)
+
+#     # Return the PDF file
+#      return send_file(pdf_path)
 
 @app.route('/atsresume')
 def atresume():

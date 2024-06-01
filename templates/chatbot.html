@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini PDF Chatbot</title>
+<style>
+    /* Your CSS styles here */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .chat-container {
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin-bottom: 20px;
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    .message {
+        margin-bottom: 10px;
+    }
+    .user-message {
+        background-color: #f0f0f0;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: right;
+    }
+    .assistant-message {
+        background-color: #e6e6e6;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    .input-container {
+        display: flex;
+    }
+    .input-container input[type="text"] {
+        flex: 1;
+        padding: 10px;
+    }
+    .input-container button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Your Job Assistant</h1>
+    <div class="chat-container" id="chat-container">
+        <!-- Chat messages will be displayed here -->
+    </div>
+    <div class="input-container">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+<script>
+function sendMessage() {
+    var userInput = document.getElementById("user-input").value;
+    var chatContainer = document.getElementById("chat-container");
+    
+    // Display user message
+    var userMessage = document.createElement("div");
+    userMessage.className = "message user-message";
+    userMessage.textContent = userInput;
+    chatContainer.appendChild(userMessage);
+    
+    // Simulate server response (replace with actual backend call)
+    setTimeout(function() {
+        var botMessage = document.createElement("div");
+        botMessage.className = "message assistant-message";
+        botMessage.textContent = "I'm just a demo bot. You can integrate me with a real chatbot backend!";
+        chatContainer.appendChild(botMessage);
+    }, 1000);
+    
+    // Clear input field
+    document.getElementById("user-input").value = "";
+}
+</script>
+</body>
+</html>
